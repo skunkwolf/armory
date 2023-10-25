@@ -61,9 +61,7 @@ This script can be run inside the container to generate service certificates sig
 generate-service-certs.sh -c "Your Common Name" -o your_service -u "Your Organizational Unit"
 ```
 
-This script performs the following: 
-
-### Script: `generate-service-certs.sh`
+---
 
 This script automates the process of generating service certificates signed by a pre-existing Root Certificate Authority (CA). It ensures that the necessary root CA certificate and key exist before proceeding with the generation of service-specific certificates.
 
@@ -83,9 +81,9 @@ generate-service-certs.sh -c "Your Common Name" -o your_service -u "Your Organiz
 
 If parameters are not provided, the script uses the following default values:
 
-- Common Name: "Default Common Name"
-- Output Name: "service"
-- Organizational Unit: "Default Organizational Unit"
+- Common Name: "skunkwolf-service"
+- Output Name: "skunkwolf-service"
+- Organizational Unit: "skunkwolf"
 
 #### Steps Performed by the Script:
 
@@ -133,7 +131,7 @@ Exit the Docker container, and you'll find the generated certificates in the `ca
 You can stop and remove the container once you've generated the necessary certificates:
 
 ```bash
-docker stop ca-container && docker rm ca-container
+docker stop skunkwolf-ca && docker rm skunkwolf-ca
 ```
 
 ## Contributing

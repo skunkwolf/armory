@@ -26,9 +26,9 @@ while getopts "c:o:u:" opt; do
 done
 
 # Set default values if parameters were not provided
-: "${COMMON_NAME:=Default Common Name}"
-: "${OUTPUT_NAME:=service}"
-: "${ORG_UNIT:=Default Organizational Unit}"
+: "${COMMON_NAME:=skunkwolf-service}"
+: "${OUTPUT_NAME:=skunkwolf-service}"
+: "${ORG_UNIT:=skunkwolf}"
 
 # Generate a private key for the service
 openssl genpkey -algorithm RSA -out $WORKDIR/${OUTPUT_NAME}.key
