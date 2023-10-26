@@ -5,7 +5,7 @@
 WORKDIR="/root/ca"
 
 # Check if the root CA certificate and key exist
-if [ ! -f $WORKDIR/ca.crt ] || [ ! -f $WORKDIR/ca.key ]; then
+if [ ! -f $WORKDIR/skunkwolf-ca.crt ] || [ ! -f $WORKDIR/skunkwolf-ca.key ]; then
   echo "Root CA certificate or key not found in $WORKDIR. Exiting."
   exit 1
 fi
@@ -37,7 +37,7 @@ openssl genpkey -algorithm RSA -out $WORKDIR/${OUTPUT_NAME}.key
 openssl req -key $WORKDIR/${OUTPUT_NAME}.key -new -out $WORKDIR/${OUTPUT_NAME}.csr -subj "/CN=${COMMON_NAME}/OU=${ORG_UNIT}"
 
 # Sign the CSR with the root CA
-openssl x509 -req -in $WORKDIR/${OUTPUT_NAME}.csr -CA $WORKDIR/ca.crt -CAkey $WORKDIR/ca.key -CAcreateserial -out $WORKDIR/${OUTPUT_NAME}.crt -days 365
+openssl x509 -req -in $WORKDIR/${OUTPUT_NAME}.csr -CA $WORKDIR/skunkwolf-ca.crt -CAkey $WORKDIR/skunkwolf-ca.key -CAcreateserial -out $WORKDIR/${OUTPUT_NAME}.crt -days 365
 
 # Optionally, print the generated service certificate
 # openssl x509 -in $WORKDIR/${OUTPUT_NAME}.crt -text -noout
