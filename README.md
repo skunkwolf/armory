@@ -71,8 +71,8 @@ openssl req -key /root/ca/skunkwolf-ca.key -new -x509 -days 3650 -out /root/ca/c
 This script can be run inside the container to generate service certificates signed by the root CA previously generated:
 
 If you are generating a certificate for a web service running at api.example.com and managed by your operations team, you might choose:
-Common Name: api.example.com
-Organizational Unit: Operations
+- Common Name: api.example.com
+- Organizational Unit: Operations
 
 ```bash
 generate-service-certs.sh -c "Your Common Name" -o your_service -u "Your Organizational Unit"
