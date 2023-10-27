@@ -85,11 +85,15 @@ This script can be run inside the container to generate service certificates sig
 You are prompted to provide several parameters, two of these, the common name and organizational unit follow naming conventions, for example, if you are generating a certificate for a web service running at api.example.com and managed by your operations team, you might choose:
 - Common Name: `api.example.com`
 - Organizational `Unit: Operations`
+- Subject Alternative Name `DNS:your-service.example.com, DNS:*.your-service.example.com`
+
+In the case of a NATS cluster deployed through helm, things are a little different. The SAN field in a TLS certificate allows the certificate to be valid for multiple domain names, and in this context, it's being used to ensure the TLS certificates are valid for the domain names used by clients and cluster nodes when connecting. The values that should be used are specifed below. 
 
 #### Usage:
 
 ```bash
-generate-service-certs.sh -c "Your Common Name" -o your_service -u "Your Organizational Unit"
+generate-nats-certs.sh -c "nats-cluster" -o nats-cluster -u "skunkwolf" -s "DNS:nats-headless.default.svc.cluster.local, DNS:*.nats-headless.default.svc.cluster.local"
+
 ```
 
 #### Parameters:
@@ -97,13 +101,15 @@ generate-service-certs.sh -c "Your Common Name" -o your_service -u "Your Organiz
 - `-c`: Common Name (CN) for the service certificate.
 - `-o`: Base name for the output files. The script will generate `${OUTPUT_NAME}.key`, `${OUTPUT_NAME}.csr`, and `${OUTPUT_NAME}.crt`.
 - `-u`: Organizational Unit (OU) for the service certificate.
+- `-s`: Subject Alternative Name (SAN) for the certificate. 
 
 #### Default Values:
 
 If parameters are not provided, the script uses the following default values:
 
-- Common Name: "skunkwolf-service"
-- Output Name: "skunkwolf-service"
+- Common Name: "nats-cluster"
+- Output Name: "nats-cluster"
+- Subject Alternative Name: "DNS:nats-headless.default.svc.cluster.local, DNS:*.nats-headless.default.svc.cluster.local"
 - Organizational Unit: "skunkwolf"
 
 #### Steps Performed by the Script:

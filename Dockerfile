@@ -8,10 +8,10 @@ RUN apk --no-cache add openssl
 WORKDIR /root/ca
 
 # Copy the script into the Docker image
-COPY generate-service-certs.sh /usr/local/bin/generate-service-certs.sh
+COPY generate-nats-certs.sh /usr/local/bin/generate-nats-certs.sh
 
 # Copy the openssl.cnf configuration file into the Docker image
 COPY openssl.cnf /etc/ssl/openssl.cnf
 
 # Make the script executable
-RUN chmod +x /usr/local/bin/generate-service-certs.sh
+RUN chmod +x /usr/local/bin/generate-nats-certs.sh
